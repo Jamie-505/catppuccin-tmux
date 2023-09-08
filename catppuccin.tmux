@@ -42,12 +42,7 @@ main() {
   set status "on"
   set status-bg "${thm_bg}"
   set status-justify "left"
-  set -g status-left-length "20"
-  # status left
-  # are we controlling tmux or the content of the panes?
-  set -g status-left '#[bg=#f8f8f2]#[fg=#282a36]#{?client_prefix,#[bg=#ff79c6],}>'
-  # are we zoomed into a pane?
-  set -ga status-left '#[bg=#44475a]#[fg=#ff79c6]#{?window_zoomed_flag,↕,}'
+  set status-left-length "20"
   set status-right-length "100"
 
   # messages
@@ -102,7 +97,7 @@ main() {
 
   local show_directory_in_window_status
   #readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
-  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #(git -C '#{pane_current_path}' rev-parse --is-inside-work-tree && git -C '#{pane_current_path}' rev-parse --show-toplevel | xargs basename || echo '#{b:pane_current_path}') | [#W] "
+  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #(git -C '#{pane_current_path}' rev-parse --is-inside-work-tree && git -C '#{pane_current_path}' rev-parse --show-toplevel | xargs basename || echo '#{b:pane_current_path}') #{?#{==:#W,zsh},,#[fg=${thm_cyan}][#W]} "
 
   local show_directory_in_window_status_current
   #readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
@@ -155,7 +150,8 @@ main() {
     right_column2=$right_column2$show_date_time
   fi
 
-  set status-left ""
+  set status-left "#[bg=$thm_bg,fg=$thm_fg]#{?client_prefix,#[bg=$thm_pink]#[fg=$thm_bg],}>"
+  # are we controlling tmux or the content of the panes?
 
   set status-right "${right_column1},${right_column2}"
 

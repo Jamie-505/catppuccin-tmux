@@ -42,7 +42,7 @@ main() {
   set status "on"
   set status-bg "${thm_bg}"
   set status-justify "left"
-  set status-left-length "20"
+  set status-left-length "0"
   set status-right-length "100"
 
   # messages
@@ -101,7 +101,7 @@ main() {
 
   local show_directory_in_window_status_current
   #readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
-  readonly show_directory_in_window_status_current="#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #{b:pane_current_path} "
+  readonly show_directory_in_window_status_current="#{?client_prefix,#[bg=$thm_green]#[fg=$thm_bg],#[fg=colour232]#[bg=$thm_orange]} #I #[fg=colour255,bg=colour237] #{b:pane_current_path} "
 
   local show_window_in_window_status
   readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #W #[fg=$thm_bg,bg=$thm_blue] #I#[fg=$thm_blue,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
@@ -150,8 +150,7 @@ main() {
     right_column2=$right_column2$show_date_time
   fi
 
-  set status-left "#[bg=$thm_bg,fg=$thm_fg]#{?client_prefix,#[bg=$thm_pink]#[fg=$thm_bg],}>"
-  # are we controlling tmux or the content of the panes?
+  set status-left ""
 
   set status-right "${right_column1},${right_column2}"
 

@@ -97,11 +97,13 @@ main() {
 
   local show_directory_in_window_status
   #readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
-  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #(git -C '#{pane_current_path}' rev-parse --is-inside-work-tree && git -C '#{pane_current_path}' rev-parse --show-toplevel | xargs basename || echo '#{b:pane_current_path}') #{?#{==:#W,zsh},,#[fg=${thm_cyan}][#W]} "
+  # readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_gray] #(git -C '#{pane_current_path}' rev-parse --is-inside-work-tree && git -C '#{pane_current_path}' rev-parse --show-toplevel | xargs basename || echo '#{b:pane_current_path}') "
+  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_gray] #{?#(git -C '#{pane_current_path}' rev-parse --is-inside-work-tree),#(git -C '#{pane_current_path}' rev-parse --show-toplevel | xargs basename),#{b:pane_current_path}} "
+  # readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
 
   local show_directory_in_window_status_current
   #readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
-  readonly show_directory_in_window_status_current="#{?client_prefix,#[bg=$thm_green]#[fg=$thm_bg],#[fg=colour232]#[bg=$thm_orange]} #I #[fg=colour255,bg=colour237] #{b:pane_current_path} "
+  readonly show_directory_in_window_status_current="#{?client_prefix,#[bg=$thm_green]#[fg=$thm_bg],#[fg=colour232]#[bg=$thm_blue]} #I #[fg=colour255,bg=colour237] #{b:pane_current_path} "
 
   local show_window_in_window_status
   readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #W #[fg=$thm_bg,bg=$thm_blue] #I#[fg=$thm_blue,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
